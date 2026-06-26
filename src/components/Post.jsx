@@ -32,6 +32,7 @@ const Post = ({ post, onDelete }) => {
     }
     setShowComments(!showComments);
   };
+  console.log(post)
 
   const submitComment = async (e) => {
     e.preventDefault();
