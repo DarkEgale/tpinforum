@@ -1,0 +1,50 @@
+.home-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  overflow: hidden;
+}
+
+.posts-feed {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-posts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.no-posts h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #495057;
+}
+
+.no-posts p {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Mobile app feel */
+@media (max-width: 500px) {
+  .home-container {
+    padding: 0;
+  }
+
+  .posts-feed {
+    padding: 12px;
+    gap: 12px;
+  }
+}
