@@ -25,6 +25,12 @@ const Profile = () => {
     getPosts().then((data) => setPosts(data.posts || [])).catch(() => {});
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      setProfileForm(user);
+    }
+  }, [user]);
+
   const showToast = (message) => {
     setToast(message);
     window.setTimeout(() => setToast(''), 2500);
@@ -35,8 +41,11 @@ const Profile = () => {
     if (!file) return;
     setUploading(field);
     try {
-      const data = await uploadToCloud(file);
+      const data = await uploadToCloud(file, field);
       setProfileForm((current) => ({ ...current, [field]: data.url }));
+      if (data.user) {
+        setUser(data.user);
+      }
       showToast('Image uploaded');
     } finally {
       setUploading('');

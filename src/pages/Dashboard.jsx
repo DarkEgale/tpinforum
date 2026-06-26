@@ -139,8 +139,11 @@ const Dashboard = () => {
     if (!file) return;
     setUploading(field);
     try {
-      const data = await uploadToCloud(file);
+      const data = await uploadToCloud(file, field);
       setProfileForm((current) => ({ ...current, [field]: data.url }));
+      if (data.user) {
+        setUser(data.user);
+      }
       showToast('Image uploaded');
     } finally {
       setUploading('');
