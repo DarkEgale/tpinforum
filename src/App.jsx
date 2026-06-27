@@ -1,22 +1,27 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import CreatePost from './pages/CreatePost';
-import Dashboard from './pages/Dashboard';
-import Messages from './pages/Messages';
-import Profile from './pages/Profile';
-import PublicProfile from './pages/PublicProfile';
-import ResultSearch from './pages/ResultSearch';
-import './index.css';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import PwaInstallPrompt from "./components/PwaInstallPrompt";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import CreatePost from "./pages/CreatePost";
+import Dashboard from "./pages/Dashboard";
+import Messages from "./pages/Messages";
+import Profile from "./pages/Profile";
+import PublicProfile from "./pages/PublicProfile";
+import ResultSearch from "./pages/ResultSearch";
+import "./index.css";
 
 const ProtectedRoute = ({ children, roles }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-300">Loading...</div>;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-slate-950 text-slate-300">
+        Loading...
+      </div>
+    );
   }
 
   if (!user) {
@@ -36,6 +41,7 @@ const AppContent = () => {
   return (
     <div className="app">
       {user && <Navbar />}
+      <PwaInstallPrompt />
       <Routes>
         <Route
           path="/"
@@ -46,7 +52,10 @@ const AppContent = () => {
           }
         />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
-        <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
+        <Route
+          path="/register"
+          element={user ? <Navigate to="/" /> : <Register />}
+        />
         <Route
           path="/dashboard"
           element={
